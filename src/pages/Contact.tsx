@@ -48,7 +48,9 @@ export default function Contact() {
       projectType,
       scale: scale || "Standard Capacity",
       email,
-      message: `Request for a ${projectType} engineered to handle ${scale || "Standard Scale"}.`
+      message: `Request for a ${projectType} engineered to handle ${scale || "Standard Scale"}.`,
+      _subject: `LEAD [Rishil Portfolio] - ${name} (${company || "Individual"})`,
+      submissionSource: "Rishil Shah Personal Portfolio"
     };
 
     try {
