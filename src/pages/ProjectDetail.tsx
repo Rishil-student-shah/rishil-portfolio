@@ -220,6 +220,19 @@ export default function ProjectDetail() {
                 />
               </div>
             </div>
+
+            {/* Architect's Personal Notes */}
+            <div className="border border-border p-6 bg-card/60 relative space-y-4">
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:14px_14px] pointer-events-none" />
+              <h3 className="text-xs font-mono tracking-wider text-lime uppercase flex items-center gap-1.5 z-10 relative">
+                ■ ARCHITECT'S NOTES (FIRST-PERSON LOG)
+              </h3>
+              <p className="text-xs text-muted-foreground leading-relaxed z-10 relative italic font-sans">
+                {project.id === "hkm-chemist" 
+                  ? `"Harikrupa Chemist was a unique human challenge. Retailers aren't software testers—they need to order medicine stock in a busy, high-stress shop. By moving the entire catalogue and order logging onto WhatsApp, we met them where they already were. They didn't have to learn a complex portal; they just sent a message."`
+                  : `"With Prishva Fintech, my priority was balancing security with human usability. Telecallers, partners, admins, and clients all log into the same database. I designed the role filters to be invisible yet completely secure, ensuring agents see only their lead lists, telecallers focus on calls, and partners review payouts without extra steps."`}
+              </p>
+            </div>
           </div>
 
           {/* Sidebar Architecture Info */}

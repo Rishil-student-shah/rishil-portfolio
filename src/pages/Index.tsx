@@ -152,6 +152,10 @@ export default function Index() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-[1]" />
         
         <div className="max-w-5xl mx-auto w-full relative z-10 py-20 text-left">
+          <div className="inline-flex items-center gap-2 border border-lime/30 bg-lime/5 px-3 py-1.5 mb-8 font-mono text-[9px] text-lime select-none">
+            <span className="w-1.5 h-1.5 bg-lime rounded-full animate-pulse" />
+            <span>CURRENT STATUS: ACTIVE &bull; RE-INDEXING CLIENT CATALOG SEARCH ALGORITHMS</span>
+          </div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
