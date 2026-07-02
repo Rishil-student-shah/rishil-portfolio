@@ -137,6 +137,15 @@ export default function Index() {
   }, []);
 
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
+  const [hasHoverSupport, setHasHoverSupport] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover)");
+    setHasHoverSupport(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setHasHoverSupport(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   return (
     <div className="min-h-screen pt-20">
@@ -206,7 +215,7 @@ export default function Index() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {projects.map((p) => {
               const isHKM = p.id === "hkm-chemist";
-              const isHovered = hoveredProjectId === p.id;
+              const isHovered = hasHoverSupport && hoveredProjectId === p.id;
               
               return (
                 <div

@@ -4,14 +4,13 @@ export const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [cursorText, setCursorText] = useState("");
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [hasHoverSupport, setHasHoverSupport] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+    const mediaQuery = window.matchMedia("(hover: hover)");
+    setHasHoverSupport(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setHasHoverSupport(e.matches);
+    mediaQuery.addEventListener("change", handler);
 
     const onMouseMove = (e: MouseEvent) => {
       if (!cursorRef.current) return;
@@ -37,13 +36,13 @@ export const CustomCursor = () => {
     window.addEventListener("mouseover", onMouseOver);
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
+      mediaQuery.removeEventListener("change", handler);
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseover", onMouseOver);
     };
   }, []);
 
-  if (isMobile) return null;
+  if (!hasHoverSupport) return null;
 
   return (
     <div
