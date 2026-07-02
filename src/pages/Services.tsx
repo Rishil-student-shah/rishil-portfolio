@@ -1,7 +1,12 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
-import { Terminal, Code, Smartphone, Layers, CheckCircle2, MessageSquare, Lock } from "lucide-react";
+import { CheckCircle2, Code, Smartphone, Layers, MessageSquare, ArrowRight, TrendingUp, ShieldCheck, Clock } from "lucide-react";
 import Seo from "../components/Seo";
+
+interface Deliverable {
+  title: string;
+  desc: string;
+}
 
 interface ServiceItem {
   id: string;
@@ -11,6 +16,9 @@ interface ServiceItem {
   stack: string;
   features: string[];
   icon: React.ComponentType<any>;
+  impact: string;
+  deliverables: Deliverable[];
+  phases: { name: string; desc: string }[];
 }
 
 const SERVICES: ServiceItem[] = [
@@ -18,52 +26,96 @@ const SERVICES: ServiceItem[] = [
     id: "web-apps",
     title: "Custom Web & Full-Stack Applications",
     shortDesc: "Engineered web platforms built for speed, performance, and scaling under heavy user reads.",
-    longDesc: "We design and deploy custom web environments utilizing high-performance server architectures and lightweight frontends. Every application is optimized for speed, featuring normalized databases, structured API routers, and clean caching layers.",
+    longDesc: "We build bespoke web systems designed to automate workflows and serve traffic efficiently. Every platform is tailored to your business rules, featuring robust databases, fast page loads, and modular APIs.",
     stack: "React, NodeJS, Python, Go, SQL Databases",
     icon: Code,
     features: [
       "Sub-second page load benchmarks under load",
       "Normalized, clean database table schemas",
       "REST & GraphQL secure API endpoints"
+    ],
+    impact: "Drives customer retention by ensuring sub-second response times and zero database locking under load.",
+    deliverables: [
+      { title: "High-Availability Backends", desc: "Server systems built to handle concurrent traffic spikes without performance degradation." },
+      { title: "Responsive Web Consoles", desc: "Modern, lightweight frontends optimized for quick loading and intuitive user navigation." },
+      { title: "Secure API Gateways", desc: "Structured, encrypted communication endpoints connecting your frontend, backend, and external tools." }
+    ],
+    phases: [
+      { name: "1. Scope & Schema Mapping", desc: "Documenting all database tables, user roles, and core operational parameters." },
+      { name: "2. Engine Development", desc: "Writing backend business logic and building frontend page layouts." },
+      { name: "3. Optimization & Handoff", desc: "Tuning query execution speeds, testing under pressure, and launching the live system." }
     ]
   },
   {
     id: "mobile-apps",
     title: "Mobile App Development",
     shortDesc: "Cross-device mobile applications compiling native iOS & Android binaries.",
-    longDesc: "Robust cross-platform mobile apps using React Native. We build native bridge architectures that integrate with device sensors, offline local caches, push alert systems, and secure credential storage.",
-    stack: "React Native, Expo, iOS Swift Native, Android Java",
+    longDesc: "Custom iOS and Android applications utilizing React Native. We write single-codebase engines that compile to high-performance native binaries, integrating offline local storage and secure system configurations.",
+    stack: "React Native, Expo, Swift, Android Java",
     icon: Smartphone,
     features: [
       "Shared business logic across iOS and Android",
       "Offline-first synchronization models",
       "Secure payment and fingerprint authentication gateways"
+    ],
+    impact: "Unifies your mobile product, cutting development overhead in half while delivering native speeds.",
+    deliverables: [
+      { title: "Cross-Device Codebase", desc: "Single application logic running smoothly across iPhone and Android devices." },
+      { title: "Offline Storage & Sync", desc: "Local database caching that lets customers access assets and execute offline actions." },
+      { title: "Native System Hooks", desc: "Clean integration with biometric logins, background alerts, and local push notifications." }
+    ],
+    phases: [
+      { name: "1. Wireframe & User Flow", desc: "Mapping mobile navigation paths, offline states, and button actions." },
+      { name: "2. Native compilation", desc: "Coding custom modules and bridging native features on iOS & Android." },
+      { name: "3. App Store Deploy", desc: "Configuring provisioning profiles, signing binaries, and publishing to Apple and Google stores." }
     ]
   },
   {
     id: "crm-erp",
     title: "Enterprise ERP & CRM Dashboards",
     shortDesc: "Secure, multi-role internal management consoles, partner portals, and auditing vaults.",
-    longDesc: "Tailored dashboard portals built to automate operational business logic. Implements secure role-based access controls, encrypted file-upload validation engines, audit trail transaction logs, and interactive lead trackers.",
+    longDesc: "Tailored internal dashboards built to automate operational business logic. We implement role-based access control, file encryption validations, audit trails, and interactive pipelines to organize complex data.",
     stack: "Multi-role Middleware, Database Warehousing, File Vaults",
     icon: Layers,
     features: [
       "Strict data isolation between roles (Admin, Partner, Caller)",
       "Secure document vaults with audit trail logging",
       "Custom business calculators and automatic lead routing"
+    ],
+    impact: "Eliminates administrative overhead and manual mistakes by organizing company pipelines and user permissions.",
+    deliverables: [
+      { title: "Role-Based Access Control", desc: "Isolated portal views specifically customized for Admins, Telecallers, Partners, or Clients." },
+      { title: "Encrypted Document Vaults", desc: "Secure file upload containers verifying document formats and logging transaction audits." },
+      { title: "Interactive Business Pipelines", desc: "Visual lead boards and calculators automatically routing inquiries based on target rules." }
+    ],
+    phases: [
+      { name: "1. Role Requirement Audit", desc: "Listing access permissions and defining how data should be restricted between roles." },
+      { name: "2. Portal Construction", desc: "Building separate console dashboards and linking shared relational database logic." },
+      { name: "3. Audit Vault & Release", desc: "Implementing security encryption protocols and logging telecaller system note modules." }
     ]
   },
   {
     id: "whatsapp-automation",
     title: "WhatsApp Automation & B2B Bots",
     shortDesc: "Stateful session routers, webhook processors, and payment gates running inside chat environments.",
-    longDesc: "Conversational automation bots that enable retailers to search product catalogs, check stocks, inspect outstanding balances, and checkout with dynamic UPI QR codes directly inside WhatsApp.",
+    longDesc: "Conversational commerce engines allowing business partners to browse medicine catalogs, inspect outstanding orders, and checkout with dynamic UPI QR codes directly inside WhatsApp.",
     stack: "Python Session Managers, Webhook API, UPI QR Integrations",
     icon: MessageSquare,
     features: [
       "Stateful user session machines preventing cart loss",
       "Medicine search queries resolving in under 10ms",
       "UPI payment callback verification hooks"
+    ],
+    impact: "Saves hundreds of telecalling hours by automating order catalog search and receipt creation.",
+    deliverables: [
+      { title: "Stateful Session Managers", desc: "State machine structures tracking customer items in their cart during conversations." },
+      { title: "Micro-second Database Index", desc: "Medicine search logic scanning 10,000+ items and returning results in milliseconds." },
+      { title: "Dynamic Payment Callbacks", desc: "Automated UPI QR checkout generators verifying invoice receipt callbacks." }
+    ],
+    phases: [
+      { name: "1. Catalog & Scheme Mapping", desc: "Gathering medicine codes and defining pricing rules (e.g. bulk discounts)." },
+      { name: "2. Bot Flow Development", desc: "Writing the Python state logic and connecting Gupshup WhatsApp webhook APIs." },
+      { name: "3. Retailer UAT & Launch", desc: "Testing chat queries with real retailers and launching order logs." }
     ]
   }
 ];
@@ -100,7 +152,7 @@ export default function Services() {
             THE BLUEPRINTS.
           </h1>
           <p className="text-xs text-muted-foreground font-mono mt-3 uppercase tracking-wider">
-            EXPERIMENT WITH LIVE SYSTEMS BLUEPRINTS IN REAL-TIME.
+            BUSINESS-FIRST CAPABILITIES AND STRUCTURAL DELIVERABLES.
           </p>
         </div>
 
@@ -129,7 +181,7 @@ export default function Services() {
             })}
           </div>
 
-          {/* Service Details & Interactive Capability Preview Console (right 8 columns) */}
+          {/* Service Details & Visual Showcase (right 8 columns) */}
           <div className="lg:col-span-8 space-y-12">
             {/* Description Card */}
             <div className="bg-card border border-border p-8 text-left space-y-6 relative overflow-hidden">
@@ -162,352 +214,73 @@ export default function Services() {
               </div>
             </div>
 
-            {/* Dynamic Capabilities Preview Console */}
-            <div className="bg-card border border-border p-8 text-left space-y-8 relative overflow-hidden">
-              <div className="border-b border-border pb-4 flex items-center justify-between font-mono text-xs text-lime">
-                <span className="flex items-center gap-2 uppercase"><Terminal className="w-4 h-4" /> Interactive Capability Simulator</span>
-                <span>STATUS: STABLE</span>
-              </div>
-
-              {/* Widget Switcher */}
-              <div className="min-h-[300px] flex items-center justify-center">
-                {activeService.id === "web-apps" && <WebOptimizerWidget />}
-                {activeService.id === "mobile-apps" && <MobileMockupWidget />}
-                {activeService.id === "crm-erp" && <RoleAccessWidget />}
-                {activeService.id === "whatsapp-automation" && <WhatsAppBotWidget />}
-              </div>
-
-              <div className="border-t border-border pt-6 flex flex-wrap justify-between items-center gap-4 font-mono text-xs">
-                <span className="text-muted-foreground">EXPERIMENT WITH CONFIGURATIONS ABOVE</span>
-                <Link
-                  to={`/contact?service=${activeService.id}`}
-                  className="bg-lime text-black font-bold tracking-widest text-[9px] px-6 py-3 border border-lime hover:bg-transparent hover:text-lime transition-all duration-300"
-                  data-cursor="INQUIRE"
-                >
-                  INQUIRE CAPACITY PROTOCOL &rarr;
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ----------------------------------------------------
-// 1. Web Optimizer Widget
-// ----------------------------------------------------
-function WebOptimizerWidget() {
-  const [dbIndexed, setDbIndexed] = useState(false);
-  const [redisCached, setRedisCached] = useState(false);
-  const [cdnEnabled, setCdnEnabled] = useState(false);
-
-  let speed = 340;
-  if (dbIndexed) speed -= 120;
-  if (redisCached) speed -= 150;
-  if (cdnEnabled) speed -= 50;
-
-  const score = speed < 40 ? "A+ BLAZING" : speed < 100 ? "A OPTIMIZED" : speed < 200 ? "B STABLE" : "F CONGESTED";
-  const scoreColor = speed < 100 ? "text-lime border-lime" : speed < 220 ? "text-blue-electric border-blue-electric" : "text-red-500 border-red-500";
-
-  return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center font-mono">
-      <div className="md:col-span-6 space-y-6">
-        <span className="text-[10px] text-muted-foreground uppercase block">ENGINE STACKS SPEED TUNER</span>
-        
-        <div className="space-y-3 text-xs">
-          <button
-            onClick={() => setDbIndexed(!dbIndexed)}
-            className={`w-full flex justify-between items-center p-3 border transition-colors ${
-              dbIndexed ? "border-lime text-lime bg-lime/5" : "border-border text-muted-foreground hover:border-foreground"
-            }`}
-          >
-            <span>[DB INDEXING SCHEMA]</span>
-            <span>{dbIndexed ? "ACTIVE (-120ms)" : "BYPASS"}</span>
-          </button>
-          
-          <button
-            onClick={() => setRedisCached(!redisCached)}
-            className={`w-full flex justify-between items-center p-3 border transition-colors ${
-              redisCached ? "border-lime text-lime bg-lime/5" : "border-border text-muted-foreground hover:border-foreground"
-            }`}
-          >
-            <span>[REDIS KEY-VALUE CACHE]</span>
-            <span>{redisCached ? "ACTIVE (-150ms)" : "BYPASS"}</span>
-          </button>
-
-          <button
-            onClick={() => setCdnEnabled(!cdnEnabled)}
-            className={`w-full flex justify-between items-center p-3 border transition-colors ${
-              cdnEnabled ? "border-lime text-lime bg-lime/5" : "border-border text-muted-foreground hover:border-foreground"
-            }`}
-          >
-            <span>[EDGE CDN DISTRIBUTION]</span>
-            <span>{cdnEnabled ? "ACTIVE (-50ms)" : "BYPASS"}</span>
-          </button>
-        </div>
-      </div>
-
-      <div className="md:col-span-6 flex flex-col justify-center items-center p-6 border border-border bg-black/40 min-h-[220px]">
-        <span className="text-[9px] text-muted-foreground mb-4">CALCULATED API SPEED GAUGE</span>
-        <div className={`w-32 h-32 rounded-full border-2 flex flex-col justify-center items-center gap-1 ${scoreColor}`}>
-          <span className="text-3xl font-bold">{speed}ms</span>
-          <span className="text-[9px] tracking-wider font-bold">{score}</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ----------------------------------------------------
-// 2. Mobile Viewport Widget
-// ----------------------------------------------------
-function MobileMockupWidget() {
-  const [activeTab, setActiveTab] = useState<"dash" | "pay" | "logs">("dash");
-
-  return (
-    <div className="w-full flex flex-col md:flex-row gap-12 items-center font-mono">
-      <div className="flex-1 space-y-6 text-left">
-        <span className="text-[10px] text-muted-foreground uppercase block">DEVICE SCREEN CONTROLLER</span>
-        <p className="text-xs text-muted-foreground font-sans leading-relaxed">
-          Cross-platform React Native apps compile clean views across all tabs. Tap the controls below to inspect mobile viewport rendering.
-        </p>
-        
-        <div className="flex flex-col gap-2.5 text-xs">
-          {["dash", "pay", "logs"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab as any)}
-              className={`p-3 border text-left uppercase transition-colors ${
-                activeTab === tab ? "border-lime text-lime bg-lime/5" : "border-border text-muted-foreground hover:border-foreground"
-              }`}
-            >
-              [TAB] {tab === "dash" ? "Asset Dashboard" : tab === "pay" ? "Secure Checkout" : "Sync Diagnostic Logs"}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* iPhone Mockup Frame */}
-      <div className="w-56 h-[300px] border border-border bg-black rounded-3xl relative p-3 flex flex-col justify-between shadow-2xl relative overflow-hidden flex-shrink-0">
-        <div className="w-20 h-3.5 bg-border rounded-full mx-auto mb-2 relative flex-shrink-0" /> {/* Speaker bar */}
-
-        {/* Screen view content */}
-        <div className="flex-1 bg-card/60 p-3 text-[8px] flex flex-col justify-between overflow-hidden relative">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.01)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:10px_10px] pointer-events-none" />
-
-          {activeTab === "dash" && (
-            <div className="space-y-2 text-left z-10 relative">
-              <div className="text-muted-foreground border-b border-border pb-1">FINANCIAL PORTFOLIO</div>
-              <div className="text-lime text-xs font-bold font-mono">Rs. 1,48,220</div>
-              <div className="border border-border p-1.5 space-y-1">
-                <div>📈 LENDER APPROVALS: 4 ACTIVE</div>
-                <div>🔄 SYNC RATE: 99.8%</div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === "pay" && (
-            <div className="space-y-3 text-left z-10 relative">
-              <div className="text-muted-foreground border-b border-border pb-1">ORDER VERIFICATION</div>
-              <div className="border border-border p-2 space-y-1.5">
-                <div>Product: Crocin Advance</div>
-                <div>Billing: Rs. 180.00</div>
-              </div>
-              <button className="w-full bg-lime text-black font-bold py-1.5 text-[8px] uppercase">
-                INITIATE BIOMETRIC PAY
-              </button>
-            </div>
-          )}
-
-          {activeTab === "logs" && (
-            <div className="space-y-1 text-left text-blue-electric font-mono z-10 relative overflow-y-auto h-full scrollbar-none">
-              <div>[SYS] INITIATING SECURE STORAGE...</div>
-              <div>[OK] SQLite ENGINE VERIFIED.</div>
-              <div>[SYNC] PUSH ALERTS ONLINE.</div>
-              <div>[OK] NATIVE BRIDGE COMPILED.</div>
-            </div>
-          )}
-
-          <span className="text-[7px] text-muted-foreground text-center border-t border-border/60 pt-1 font-mono uppercase tracking-widest mt-auto">
-            {activeTab.toUpperCase()} VIEW
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ----------------------------------------------------
-// 3. Role Access Widget
-// ----------------------------------------------------
-function RoleAccessWidget() {
-  const [role, setRole] = useState<"client" | "caller" | "admin">("client");
-
-  return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center font-mono">
-      <div className="md:col-span-4 flex flex-col gap-3 text-xs">
-        <span className="text-[10px] text-muted-foreground uppercase block text-left">SELECT ACCESS ROLE</span>
-        {["client", "caller", "admin"].map((r) => (
-          <button
-            key={r}
-            onClick={() => setRole(r as any)}
-            className={`p-3 border text-left uppercase transition-colors ${
-              role === r ? "border-lime text-lime bg-lime/5" : "border-border text-muted-foreground hover:border-foreground"
-            }`}
-          >
-            [ROLE] {r === "client" ? "Public Client" : r === "caller" ? "Staff Telecaller" : "Global Admin"}
-          </button>
-        ))}
-      </div>
-
-      <div className="md:col-span-8 bg-black/40 border border-border p-6 text-[10px] space-y-4 text-left min-h-[220px]">
-        <div className="border-b border-border pb-2 text-[9px] text-muted-foreground flex justify-between">
-          <span>ROLE SECURITY SIMULATOR</span>
-          <span>ROLE: {role.toUpperCase()}</span>
-        </div>
-
-        <div className="space-y-3">
-          {/* Node 1 */}
-          <div className="flex justify-between items-center p-2.5 border border-border/80">
-            <span>1. EMI SIP CALCULATOR GATEWAY</span>
-            <span className="text-lime flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5" /> ACCESS GRANTED</span>
-          </div>
-
-          {/* Node 2 */}
-          <div className="flex justify-between items-center p-2.5 border border-border/80">
-            <span>2. CLIENT PIPELINE NOTES</span>
-            {role === "client" ? (
-              <span className="text-red-500 flex items-center gap-1.5"><Lock className="w-3.5 h-3.5" /> REJECTED</span>
-            ) : (
-              <span className="text-lime flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5" /> ACCESS GRANTED</span>
-            )}
-          </div>
-
-          {/* Node 3 */}
-          <div className="flex justify-between items-center p-2.5 border border-border/80">
-            <span>3. ACCESS AUDIT LOG VAULTS</span>
-            {role === "admin" ? (
-              <span className="text-lime flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5" /> ACCESS GRANTED</span>
-            ) : (
-              <span className="text-red-500 flex items-center gap-1.5"><Lock className="w-3.5 h-3.5" /> REJECTED</span>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ----------------------------------------------------
-// 4. WhatsApp Chat Bot Widget
-// ----------------------------------------------------
-function WhatsAppBotWidget() {
-  const [messages, setMessages] = useState<{ sender: "user" | "bot"; text: string; time: string; type?: string }[]>([
-    { sender: "bot", text: "Welcome to Harikrupa Chemist. Tap a query option below to test catalog searches or checkout.", time: "23:30" }
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isTyping]);
-
-  const triggerReply = (userText: string, botText: string, delay: number, type?: string) => {
-    if (isTyping) return;
-    
-    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    setMessages(prev => [...prev, { sender: "user", text: userText, time }]);
-    setIsTyping(true);
-
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages(prev => [...prev, { sender: "bot", text: botText, time, type }]);
-    }, delay);
-  };
-
-  return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-center font-mono">
-      <div className="md:col-span-5 flex flex-col gap-3 text-xs">
-        <span className="text-[10px] text-muted-foreground uppercase block text-left">SEND CHAT QUERY CMD</span>
-        <button
-          onClick={() => triggerReply(
-            "Search Crocin", 
-            "📦 MATCHES FOUND:\n1. Crocin Advance (Rs. 18.00) [100 in stock]\n2. Crocin Pain Relief (Rs. 24.00) [50 in stock]",
-            700
-          )}
-          disabled={isTyping}
-          className="p-3 border text-left transition-colors border-border text-muted-foreground hover:border-lime hover:text-lime"
-        >
-          [CHAT] "Search medicine Crocin"
-        </button>
-
-        <button
-          onClick={() => triggerReply(
-            "Add Crocin Advance to Cart", 
-            "🛒 ADDED TO CART:\n1x Crocin Advance (Rs. 18.00).\nTotal cart cost: Rs. 18.00.",
-            800
-          )}
-          disabled={isTyping}
-          className="p-3 border text-left transition-colors border-border text-muted-foreground hover:border-lime hover:text-lime"
-        >
-          [CHAT] "Add 1x Crocin to Cart"
-        </button>
-
-        <button
-          onClick={() => triggerReply(
-            "Checkout order", 
-            "💳 ORDER LOCKED.\nScan this UPI QR code inside your mobile banking app to complete the checkout.",
-            900,
-            "qr"
-          )}
-          disabled={isTyping}
-          className="p-3 border text-left transition-colors border-border text-muted-foreground hover:border-lime hover:text-lime"
-        >
-          [CHAT] "Finalize order checkout"
-        </button>
-      </div>
-
-      <div className="md:col-span-7 bg-black/40 border border-border h-[260px] flex flex-col justify-between overflow-hidden shadow-xl rounded-none relative">
-        <div className="bg-lime/10 border-b border-border p-3 flex items-center justify-between text-xs text-lime">
-          <span className="flex items-center gap-2"><MessageSquare className="w-4 h-4 text-lime" /> WHATSAPP CHAT CHANNEL</span>
-          <span className="text-[9px] uppercase tracking-widest text-muted-foreground">ONLINE</span>
-        </div>
-
-        <div className="flex-1 p-4 overflow-y-auto space-y-3 scrollbar-none text-[10px]">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex flex-col max-w-[80%] p-2.5 rounded-none border text-left ${
-                msg.sender === "user"
-                  ? "bg-lime/5 border-lime/30 ml-auto"
-                  : "bg-muted/20 border-border mr-auto"
-              }`}
-            >
-              <pre className="whitespace-pre-wrap font-sans text-[10px] leading-relaxed text-foreground">
-                {msg.text}
-              </pre>
-              {msg.type === "qr" && (
-                <div className="my-2 border border-border p-2 bg-white w-20 h-20 flex items-center justify-center mx-auto">
-                  {/* Visual QR Code Mockup */}
-                  <div className="w-16 h-16 bg-black flex flex-wrap p-1">
-                    <div className="w-6 h-6 border-2 border-white m-0.5" />
-                    <div className="w-6 h-6 border-2 border-white m-0.5" />
-                    <div className="w-6 h-6 border-2 border-white m-0.5" />
-                    <div className="w-6 h-6 border-2 border-white m-0.5" />
-                  </div>
+            {/* Dynamic Value Showcase: Outcome & Process Panels (NO technical emulators!) */}
+            <div className="space-y-8">
+              {/* Outcome Card */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="border border-border bg-card/40 p-6 space-y-3 text-left">
+                  <TrendingUp className="w-5 h-5 text-lime" />
+                  <span className="block font-mono text-[10px] text-muted-foreground uppercase">Business Impact</span>
+                  <p className="text-xs text-foreground/90 font-sans leading-relaxed">{activeService.impact}</p>
                 </div>
-              )}
-              <span className="text-[7px] text-muted-foreground text-right block mt-1 font-mono">{msg.time}</span>
+                
+                <div className="border border-border bg-card/40 p-6 space-y-3 text-left">
+                  <ShieldCheck className="w-5 h-5 text-lime" />
+                  <span className="block font-mono text-[10px] text-muted-foreground uppercase">Quality Assurance</span>
+                  <p className="text-xs text-foreground/90 font-sans leading-relaxed">Built with strict type boundaries, modular files, and full security auditing logs.</p>
+                </div>
+
+                <div className="border border-border bg-card/40 p-6 space-y-3 text-left">
+                  <Clock className="w-5 h-5 text-lime" />
+                  <span className="block font-mono text-[10px] text-muted-foreground uppercase">Release Velocity</span>
+                  <p className="text-xs text-foreground/90 font-sans leading-relaxed">Systematic sprint plans delivering testable milestones every two weeks.</p>
+                </div>
+              </div>
+
+              {/* Deliverables breakdown list */}
+              <div className="border border-border bg-card/30 p-8 text-left space-y-6">
+                <span className="block font-mono text-xs text-lime uppercase tracking-widest">■ WHAT WE DEPLOY FOR YOU</span>
+                <div className="divide-y divide-border font-sans">
+                  {activeService.deliverables.map((del, i) => (
+                    <div key={i} className="py-4 first:pt-0 last:pb-0 flex flex-col md:flex-row gap-4 items-start justify-between">
+                      <div className="md:w-1/3">
+                        <span className="font-mono text-xs font-bold text-foreground uppercase">{del.title}</span>
+                      </div>
+                      <div className="md:w-2/3">
+                        <p className="text-xs text-muted-foreground leading-relaxed">{del.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* The Release Path Timeline */}
+              <div className="border border-border bg-card/30 p-8 text-left space-y-6">
+                <span className="block font-mono text-xs text-lime uppercase tracking-widest">■ THE DEPLOYMENT PATH</span>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+                  {activeService.phases.map((ph, i) => (
+                    <div key={i} className="space-y-2 border-l border-lime/30 pl-4 relative">
+                      <div className="absolute w-2 h-2 bg-lime rounded-full -left-[4.5px] top-1" />
+                      <span className="font-bold text-lime block uppercase">{ph.name}</span>
+                      <p className="text-[10px] text-muted-foreground leading-relaxed font-sans">{ph.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          ))}
-          {isTyping && (
-            <div className="bg-muted/10 border border-border mr-auto p-2 text-[9px] text-lime animate-pulse font-mono max-w-[60%]">
-              typing response...
+
+            {/* Bottom capacity inquiry redirect bar */}
+            <div className="border border-border p-6 flex flex-wrap justify-between items-center gap-4 bg-muted/10">
+              <span className="font-mono text-xs text-muted-foreground uppercase">ESTABLISH SYSTEM REQUIREMENTS</span>
+              <Link
+                to={`/contact?service=${activeService.id}`}
+                className="bg-lime text-black font-mono font-bold tracking-widest text-[9px] px-8 py-3.5 border border-lime hover:bg-transparent hover:text-lime transition-all duration-300 flex items-center gap-2"
+                data-cursor="INQUIRE"
+              >
+                DISCUSS THIS BLUEPRINT <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             </div>
-          )}
-          <div ref={bottomRef} />
+          </div>
         </div>
       </div>
     </div>
