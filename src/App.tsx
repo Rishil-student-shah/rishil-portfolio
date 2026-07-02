@@ -19,7 +19,7 @@ function App() {
         <div className="flex flex-col min-h-screen relative bg-background text-foreground selection:bg-lime selection:text-black">
           <CustomCursor />
           <Navbar />
-          <main className="flex-1 w-full max-w-7xl mx-auto px-6 pb-12">
+          <main className="flex-1 w-full pb-12">
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/services" element={<Services />} />
