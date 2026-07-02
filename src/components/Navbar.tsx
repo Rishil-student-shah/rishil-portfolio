@@ -7,7 +7,8 @@ export default function Navbar() {
   const location = useLocation();
 
   const links = [
-    { to: "/", label: "HOME" },
+    { to: "/", label: "THE ENGINE" },
+    { to: "/services", label: "THE BLUEPRINTS" },
     { to: "/works", label: "PRODUCTION" },
     { to: "/about", label: "THE ARCHITECT" }
   ];

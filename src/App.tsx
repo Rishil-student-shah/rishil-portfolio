@@ -9,6 +9,7 @@ import Works from "./pages/Works";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Services from "./pages/Services";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <main className="flex-1 w-full max-w-7xl mx-auto px-6 pb-12">
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/works" element={<Works />} />
               <Route path="/works/:slug" element={<ProjectDetail />} />
               <Route path="/about" element={<About />} />

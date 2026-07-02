@@ -132,7 +132,7 @@ export default function About() {
     <div className="min-h-screen pt-28 pb-20 text-left">
       <Seo
         title="About The Architect | Rishil Shah"
-        description="Learn about Rishil Shah, full-stack web and mobile developer specializing in scalable applications."
+        description="Learn about Rishil Shah, systems architect and B2B product developer specializing in scalable applications."
         path="/about"
       />
 
@@ -149,11 +149,11 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-24">
           <div className="lg:col-span-7 space-y-6">
             <h2 className="text-xl font-mono tracking-tight font-bold text-foreground">
-              RISHIL SHAH &mdash; FULL-STACK WEB & MOBILE ENGINEER.
+              RISHIL SHAH &mdash; SYSTEMS ARCHITECT & B2B PRODUCT ENGINEER.
             </h2>
             <div className="text-sm text-muted-foreground leading-relaxed space-y-4 font-sans">
               <p>
-                I specialize in building cross-device mobile applications, engineering backend logic that holds under pressure, normalizing database schemas for sub-second query resolutions, and designing conversational WhatsApp chatbot flows.
+                I design and deploy digital engines. I specialize in backend scaling, bespoke CRM/ERP systems, mobile applications, and B2B chatbot integrations. My focus is entirely on performance constraints, automation, and speed—building products that handle heavy transaction volumes without breaking.
               </p>
               <p>
                 As a developer, my focus is strictly on **infrastructure scalability and process optimization**. I believe that code is an asset only when it reduces operational bottlenecks, automates human error away, and delivers reliable uptime.
