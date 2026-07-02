@@ -226,8 +226,8 @@ export default function Services() {
               <div className="flex-1 overflow-y-auto pr-2 scrollbar-none space-y-2">
                 {compilerLogs.map((log, index) => (
                   <div key={index} className={
-                    log.includes("[STATUS]") ? "text-lime font-bold" :
-                    log.includes("[DB]") ? "text-blue-electric" : "text-foreground/80"
+                    log?.includes("[STATUS]") ? "text-lime font-bold" :
+                    log?.includes("[DB]") ? "text-blue-electric" : "text-foreground/80"
                   }>
                     {log}
                   </div>

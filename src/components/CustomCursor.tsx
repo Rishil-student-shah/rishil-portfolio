@@ -20,14 +20,17 @@ export const CustomCursor = () => {
     };
 
     const onMouseOver = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest("[data-cursor]");
-      if (target) {
-        setIsHovered(true);
-        setCursorText(target.getAttribute("data-cursor") || "");
-      } else {
-        setIsHovered(false);
-        setCursorText("");
+      const targetElement = e.target as HTMLElement;
+      if (targetElement && typeof targetElement.closest === "function") {
+        const target = targetElement.closest("[data-cursor]");
+        if (target) {
+          setIsHovered(true);
+          setCursorText(target.getAttribute("data-cursor") || "");
+          return;
+        }
       }
+      setIsHovered(false);
+      setCursorText("");
     };
 
     window.addEventListener("mousemove", onMouseMove);
