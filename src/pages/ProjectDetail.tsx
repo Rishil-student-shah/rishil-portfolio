@@ -228,9 +228,10 @@ export default function ProjectDetail() {
                 ■ ARCHITECT'S NOTES (FIRST-PERSON LOG)
               </h3>
               <p className="text-xs text-muted-foreground leading-relaxed z-10 relative italic font-sans">
-                {project.id === "hkm-chemist" 
-                  ? `"Harikrupa Chemist was a unique human challenge. Retailers aren't software testers—they need to order medicine stock in a busy, high-stress shop. By moving the entire catalogue and order logging onto WhatsApp, we met them where they already were. They didn't have to learn a complex portal; they just sent a message."`
-                  : `"With Prishva Fintech, my priority was balancing security with human usability. Telecallers, partners, admins, and clients all log into the same database. I designed the role filters to be invisible yet completely secure, ensuring agents see only their lead lists, telecallers focus on calls, and partners review payouts without extra steps."`}
+                {project.id === "hkm-chemist" && `"Harikrupa Chemist was a unique human challenge. Retailers aren't software testers—they need to order medicine stock in a busy, high-stress shop. By moving the entire catalogue and order logging onto WhatsApp, we met them where they already were. They didn't have to learn a complex portal; they just sent a message."`}
+                {project.id === "prishva-fintech" && `"With Prishva Fintech, my priority was balancing security with human usability. Telecallers, partners, admins, and clients all log into the same database. I designed the role filters to be invisible yet completely secure, ensuring agents see only their lead lists, telecallers focus on calls, and partners review payouts without extra steps."`}
+                {project.id === "cricmanager" && `"CricManager was built for high-stakes, fast-paced sports auctions where split-second bid delays can cause massive operational disputes. I designed the database query select_related parameters to eliminate N+1 lags entirely and synced all modal state operations locally so organizers never face budget discrepancies."`}
+                {project.id === "the-great-heist" && `"Stealth games require seamless 60 FPS feedback to feel immersive. Moving physics layers from Pygame to Android Canvas caused immediate memory and Garbage Collector stutters. I solved it by caching shared bitmaps and pre-allocating layout objects outside the drawing loop—giving players a completely lag-free tactical stealth experience."`}
               </p>
             </div>
           </div>

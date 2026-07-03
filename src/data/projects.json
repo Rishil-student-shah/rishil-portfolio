@@ -91,5 +91,103 @@
         "type": "desktop"
       }
     ]
+  },
+  {
+    "id": "cricmanager",
+    "title": "CricManager - Cricket Tournament Management System",
+    "slug": "cricmanager-tournament-system",
+    "category": "crm-erp",
+    "client_name": "CricManager (Proprietary Platform)",
+    "technologies": ["Python", "Django", "MySQL", "HTML5", "Vanilla CSS3", "Bootstrap 5", "jQuery", "AJAX"],
+    "short_description": "An interactive Cricket Tournament Management and Auction system with real-time bidding dashboards, dynamic team roster management, and automated email notifications.",
+    "full_description": "<p>CricManager is a comprehensive tournament administration and player auction platform built to streamline sports event management. Organizers host live player bidding rounds where team representatives buy players from categorized categories under strict budget constraints.</p><p>The system features real-time AJAX budget updates, asynchronous player selection, dynamic captains assignments, and multi-role dashboards for administrators, tournament organizers, and view-only public viewers.</p>",
+    "challenges": "<p>Handling high-velocity asynchronous actions during live player bidding caused database race conditions and latency issues. Query bottlenecks from loading captain profiles inside team loops (N+1 queries) also degraded dashboard loading times.</p>",
+    "solution": "<p>We resolved query latencies by implementing Django select_related('captain') optimizations on relational joins. A custom jQuery client-side state manager was built to sync and recalculate budgets, unsold boards, and team counts instantly without database page reloads, ensuring 100% data integrity during live auctions.</p>",
+    "thumbnail": "/assets/cricmanager-dashboard.png",
+    "is_featured": true,
+    "completion_date": "2025-11",
+    "published": true,
+    "display_order": 3,
+    "timeline": [
+      {
+        "phase": "Schema & User Access",
+        "date": "Month 1",
+        "description": "Designed the tournament database tables, category base prices, and multi-role permission decorators."
+      },
+      {
+        "phase": "Bidding Engine",
+        "date": "Month 2",
+        "description": "Built the interactive jQuery AJAX bidding dashboard with automatic budget validation check limits."
+      },
+      {
+        "phase": "Integrations",
+        "date": "Month 3",
+        "description": "Integrated SMTP transaction notifications, CSV/Excel template import and export tools, and launched live."
+      }
+    ],
+    "results": [
+      { "label": "Budget Integrity", "value": "100%", "icon": "shield" },
+      { "label": "Panel Latency", "value": "<50ms", "icon": "zap" },
+      { "label": "Tournament Scale", "value": "Unlimited", "icon": "globe" }
+    ],
+    "testimonial_text": "CricManager completely automated our tournament auction. Team captains were bought and assigned instantly, and the real-time budget synchronization meant zero manual errors during fast-paced bidding. Email updates kept players and sponsors fully informed.",
+    "testimonial_author": "Tournament Organizers",
+    "testimonial_role": "Event Coordination Team",
+    "gallery": [
+      {
+        "url": "/assets/cricmanager-dashboard.png",
+        "caption": "CricManager live auction dashboard showing real-time bid updates and team roster statuses.",
+        "type": "desktop"
+      }
+    ]
+  },
+  {
+    "id": "the-great-heist",
+    "title": "The Great Heist - Top-Down Action Stealth Game",
+    "slug": "the-great-heist-game",
+    "category": "mobile-apps",
+    "client_name": "The Great Heist (Android Sandbox Build)",
+    "technologies": ["Kotlin", "Android Studio", "Android Canvas API", "Firebase Realtime DB", "SoundPool API", "Material Design 3"],
+    "short_description": "A top-down 2D tactical stealth action game featuring procedurally generated levels, a custom Canvas rendering loop, sound effects, and Firebase progression sync.",
+    "full_description": "<p>The Great Heist is a fast-paced 2D stealth game compiled in Kotlin using Android Studio. Players control an operative navigating secure installations, evading moving AI guards, collecting treasure gold, and executing clean extractions.</p><p>The game implements a custom 2D game loop, twin-stick motion coordinate handlers, low-latency audio playbacks, and real-time cloud save progression synchronization using Firebase.</p>",
+    "challenges": "<p>The continuous high-frequency allocation of Paint, Vector, and Matrix objects inside the Canvas draw() thread (running 60 times/sec) caused heavy Garbage Collection (GC) pauses and memory-leak crashes on older Android viewports.</p>",
+    "solution": "<p>We re-architected the asset lifecycle to use a shared static bitmap cache, loading sprites only once at launch. Object instantiation was eliminated from the draw loop through static pre-allocation. Explicit .recycle() hooks were added to clear high-resolution resource streams immediately after scaling.</p>",
+    "thumbnail": "/assets/great-heist-gameplay.png",
+    "is_featured": true,
+    "completion_date": "2026-01",
+    "published": true,
+    "display_order": 4,
+    "timeline": [
+      {
+        "phase": "Game Loop & AI",
+        "date": "Month 1",
+        "description": "Implemented custom game loop, collision physics, and top-down AI pathfinding scripts."
+      },
+      {
+        "phase": "Database & Audio",
+        "date": "Month 2",
+        "description": "Integrated Firebase Realtime Database for progression, and SoundPool for low-latency effects."
+      },
+      {
+        "phase": "GC Tuning",
+        "date": "Month 3",
+        "description": "Re-allocated matrix pointers out of frame-loop, resolved GC stuttering, and compiled Android binaries."
+      }
+    ],
+    "results": [
+      { "label": "Frame-Rate", "value": "60 FPS", "icon": "zap" },
+      { "label": "Memory Security", "value": "100%", "icon": "shield" },
+      { "label": "Cloud Save Sync", "value": "<200ms", "icon": "clock" }
+    ],
+    "testimonial_text": "The transition from a Pygame prototype to a full Android Canvas application was challenging. Solving the garbage collection stutter and optimizing memory allocation helped us build a smooth 60 FPS mobile stealth game.",
+    "testimonial_author": "Rishil Shah",
+    "testimonial_role": "Solo Game Developer",
+    "gallery": [
+      {
+        "url": "/assets/great-heist-gameplay.png",
+        "caption": "The Great Heist top-down stealth gameplay showing procedurally generated rooms and guard patrol lines.",
+        "type": "mobile"
+      }
+    ]
   }
 ]
