@@ -14,14 +14,15 @@ interface TechNode {
 }
 
 const TECH_NODES: TechNode[] = [
-  { id: "python", label: "PYTHON", x: 120, y: 110, r: 38, color: "rgba(180, 255, 30, 1)", desc: "Programming language for secure scripts, backend automation logic, and API algorithms." },
-  { id: "django", label: "DJANGO", x: 260, y: 150, r: 38, color: "rgba(90, 200, 255, 1)", desc: "Web framework used to organize secure backend pipelines and relational queries." },
-  { id: "react", label: "REACT", x: 380, y: 90, r: 38, color: "rgba(140, 82, 255, 1)", desc: "Frontend library for rendering dynamic interface dashboards and web applications." },
-  { id: "mobile", label: "MOBILE DEV", x: 460, y: 170, r: 38, color: "rgba(180, 255, 30, 1)", desc: "Cross-platform mobile application development using React Native to compile native iOS & Android binaries." },
-  { id: "postgres", label: "POSTGRES", x: 180, y: 220, r: 38, color: "rgba(90, 200, 255, 1)", desc: "Relational database used for transactional query indexing and data integrity." },
-  { id: "mysql", label: "MYSQL", x: 330, y: 250, r: 38, color: "rgba(180, 255, 30, 1)", desc: "Relational data store used to organize concurrent, multi-role CRM leads databases." },
-  { id: "whatsapp", label: "WHATSAPP", x: 140, y: 310, r: 38, color: "rgba(140, 82, 255, 1)", desc: "Integration API used to route stateful chat-ordering and webhook routers." },
-  { id: "tailwind", label: "TAILWIND", x: 390, y: 280, r: 38, color: "rgba(90, 200, 255, 1)", desc: "Responsive layout system ensuring visual consistency across mobile and desktop screens." }
+  { id: "python", label: "PYTHON", x: 100, y: 90, r: 35, color: "rgba(180, 255, 30, 1)", desc: "Programming language for secure scripts, backend automation logic, and API algorithms." },
+  { id: "django", label: "DJANGO", x: 240, y: 140, r: 35, color: "rgba(90, 200, 255, 1)", desc: "Web framework used to organize secure backend pipelines and relational queries." },
+  { id: "react", label: "REACT", x: 380, y: 90, r: 35, color: "rgba(140, 82, 255, 1)", desc: "Frontend library for rendering dynamic interface dashboards and web applications." },
+  { id: "mobile", label: "MOBILE", x: 470, y: 160, r: 35, color: "rgba(180, 255, 30, 1)", desc: "Cross-platform mobile application development using React Native to compile native iOS & Android binaries." },
+  { id: "crm_erp", label: "CRM / ERP", x: 340, y: 200, r: 35, color: "rgba(140, 82, 255, 1)", desc: "Custom enterprise dashboards, partner portals, and multi-role operations engines built to organize leads and automate office pipelines." },
+  { id: "postgres", label: "POSTGRES", x: 130, y: 210, r: 35, color: "rgba(90, 200, 255, 1)", desc: "Relational database used for transactional query indexing and data integrity." },
+  { id: "mysql", label: "MYSQL", x: 260, y: 260, r: 35, color: "rgba(180, 255, 30, 1)", desc: "Relational data store used to organize concurrent, multi-role CRM leads databases." },
+  { id: "whatsapp", label: "WHATSAPP", x: 110, y: 310, r: 35, color: "rgba(140, 82, 255, 1)", desc: "Integration API used to route stateful chat-ordering and webhook routers." },
+  { id: "tailwind", label: "TAILWIND", x: 420, y: 270, r: 35, color: "rgba(90, 200, 255, 1)", desc: "Responsive layout system ensuring visual consistency across mobile and desktop screens." }
 ];
 
 const CONNECTIONS = [
@@ -31,6 +32,8 @@ const CONNECTIONS = [
   ["django", "mysql"],
   ["django", "whatsapp"],
   ["django", "mobile"],
+  ["django", "crm_erp"],
+  ["react", "crm_erp"],
   ["react", "mobile"],
   ["react", "tailwind"],
   ["postgres", "mysql"]
@@ -106,8 +109,11 @@ export default function About() {
 
     const onMouseClick = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const clickY = e.clientY - rect.top;
+      // Account for visual scale scaling in mobile layout widths
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const clickX = (e.clientX - rect.left) * scaleX;
+      const clickY = (e.clientY - rect.top) * scaleY;
 
       // Find if clicked node
       TECH_NODES.forEach((n) => {
@@ -151,15 +157,15 @@ export default function About() {
             <h2 className="text-xl font-mono tracking-tight font-bold text-foreground">
               RISHIL SHAH &mdash; SYSTEMS ARCHITECT & B2B PRODUCT ENGINEER.
             </h2>
-            <div className="text-sm text-muted-foreground leading-relaxed space-y-4 font-sans">
+            <div className="text-sm text-muted-foreground leading-relaxed space-y-5 font-sans">
               <p>
-                I design and deploy digital engines. I specialize in backend scaling, bespoke CRM/ERP systems, mobile applications, and B2B chatbot integrations. My focus is entirely on performance constraints, automation, and speed—building products that handle heavy transaction volumes without breaking.
+                I don't deal in generic templates or cookie-cutter solutions. My work is about designing **digital engines** that function flawlessly under pressure. I partner with businesses that need secure, scalable backends, multi-role CRM dashboard architectures, custom mobile applications, and stateful conversational chatbot flows.
               </p>
               <p>
-                As a developer, my focus is strictly on **infrastructure scalability and process optimization**. I believe that code is an asset only when it reduces operational bottlenecks, automates human error away, and delivers reliable uptime.
+                To me, code isn't just about syntax—it's about structural reliability. If a database takes longer than 15ms to return search results, or if a webhook drops user sessions when traffic spikes, that's a design failure. I focus strictly on eliminating bottlenecks, validating inputs, and automating process logic.
               </p>
               <p>
-                Whether it's designing secure role-based access controllers for enterprise financial portals or mapping out intricate session routers for stateful chatbots, my approach prioritizes precision, speed, and metric-proven outcomes.
+                Whether it is mapping rules to pair borrowers with matching lenders, designing database search indices for 10,000+ items, or routing orders via automated WhatsApp chats, I build for scale, speed, and real-world utility.
               </p>
             </div>
           </div>
@@ -183,7 +189,7 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Stack Canvas */}
             <div className="lg:col-span-6 bg-card border border-border p-6 flex justify-center items-center relative overflow-hidden h-[420px] rounded-none">
-              <canvas ref={canvasRef} className="z-10 relative cursor-pointer" data-cursor="TAP NODE" />
+              <canvas ref={canvasRef} className="w-full h-auto max-w-[550px] max-h-[400px] z-10 relative cursor-pointer" data-cursor="TAP NODE" />
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
             </div>
 
